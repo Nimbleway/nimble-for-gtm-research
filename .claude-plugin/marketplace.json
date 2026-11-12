@@ -1,0 +1,34 @@
+{
+  "name": "nimble-gtm-research",
+  "owner": {
+    "name": "Nimble",
+    "email": "support@nimbleway.com"
+  },
+  "metadata": {
+    "description": "Nimble skills for go-to-market research: account research, prospecting, enrichment and GTM signals"
+  },
+  "plugins": [
+    {
+      "name": "nimble-gtm-research",
+      "source": "./",
+      "description": "Account research agents, fast search, ICP list building and CRM enrichment, and GTM signal data at scale for sales, SDR, RevOps and marketing teams, with the Nimble MCP server bundled.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "gtm",
+        "sales",
+        "prospecting",
+        "account-research",
+        "enrichment",
+        "web-search"
+      ],
+      "skills": [
+        "./skills/onboard-your-agent",
+        "./skills/account-deep-research",
+        "./skills/account-fast-search",
+        "./skills/account-lists-and-enrichment",
+        "./skills/gtm-data-at-scale"
+      ]
+    }
+  ]
+}

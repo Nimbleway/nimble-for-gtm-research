@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "nimble": {
+      "type": "http",
+      "url": "https://mcp.nimbleway.com/mcp"
+    }
+  }
+}

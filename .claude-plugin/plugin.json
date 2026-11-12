@@ -1,0 +1,30 @@
+{
+  "name": "nimble-gtm-research",
+  "version": "1.0.0",
+  "description": "Nimble skills for go-to-market research: cited account research with 12 GTM Web Search Agents, fast first-party search, ICP list building and CRM enrichment, and GTM signal data at scale with Extract Templates.",
+  "author": {
+    "name": "Nimble",
+    "email": "support@nimbleway.com",
+    "url": "https://www.nimbleway.com"
+  },
+  "homepage": "https://www.nimbleway.com",
+  "repository": "https://github.com/Nimbleway/nimble-for-gtm-research",
+  "license": "MIT",
+  "keywords": [
+    "nimble",
+    "gtm",
+    "sales",
+    "sales-intelligence",
+    "prospecting",
+    "account-research",
+    "lead-enrichment",
+    "buying-signals",
+    "revops",
+    "web-search",
+    "agents"
+  ],
+  "skills": [
+    "./skills/"
+  ],
+  "mcpServers": "./.mcp.json"
+}
