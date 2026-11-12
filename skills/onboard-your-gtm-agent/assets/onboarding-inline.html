@@ -6,6 +6,7 @@
 .nb-h2{font-size:15px;font-weight:500;margin:0 0 10px!important}
 .nb-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media (max-width:520px){.nb-g{grid-template-columns:1fr}}
+.nb-tile:last-child:nth-child(odd){grid-column:1/-1}
 .nb-tile{background:var(--surface-2,transparent);border:0.5px solid var(--border,rgba(127,127,127,.35));border-radius:12px;padding:12px 14px}
 .nb-t{font-weight:500;font-size:14px}
 .nb-api{font-size:12px;color:var(--text-accent,#2a78d6);margin:2px 0 6px!important}
@@ -74,9 +75,10 @@
 <p class="nb-h2">Test Nimble's APIs on these use cases, right here in your AI.</p>
 <div class="nb-g">
 <div class="nb-tile"><p class="nb-t">Account research</p><p class="nb-api">Web Search Agents API</p><p class="nb-d">12 GTM agents (meeting prep, buying triggers, decision makers, competitive and brand intel, social) plus custom agents. Cited answers in about 2 to 10 minutes.</p><p class="nb-ex">&ldquo;Prepare me for a meeting with Gong (gong.io).&rdquo;</p></div>
-<div class="nb-tile"><p class="nb-t">Fast search</p><p class="nb-api">Search + Extract APIs</p><p class="nb-d">Answers in seconds from company sites, newsrooms, careers pages and the press, with dated citations.</p><p class="nb-ex">&ldquo;Who is Datadog&#x27;s current CRO, and since when?&rdquo;</p></div>
+<div class="nb-tile"><p class="nb-t">Fast search</p><p class="nb-api">Search + Extract APIs</p><p class="nb-d">Answers in seconds from company sites, newsrooms, careers pages and the press, with dated citations.</p><p class="nb-ex">&ldquo;Did Clay raise a round this year?&rdquo;</p></div>
 <div class="nb-tile"><p class="nb-t">Lists &amp; CRM enrichment</p><p class="nb-api">Web Search Agents + Search APIs</p><p class="nb-d">Build ICP account lists with near-misses, and fill CRM fields (firmographics, funding, leaders, hiring) with sources and conflicts kept.</p><p class="nb-ex">&ldquo;Find US legal AI companies, Series A to C, hiring AEs.&rdquo;</p></div>
 <div class="nb-tile"><p class="nb-t">GTM data at scale</p><p class="nb-api">Extract Templates + Jobs API</p><p class="nb-d">Job postings, reviews, local business lists, social and AI-answer visibility from 800+ Extract Templates, as batches or scheduled jobs.</p><p class="nb-ex">&ldquo;Track sales hiring at my top 200 accounts weekly.&rdquo;</p></div>
+<div class="nb-tile"><p class="nb-t">People research</p><p class="nb-api">Search + Web Search Agents APIs</p><p class="nb-d">Who holds a role, verified as current, in seconds; deep person briefs, buying committees and job-change checks with agents.</p><p class="nb-ex">&ldquo;Who is Gong&#x27;s CRO today, and since when?&rdquo;</p></div>
 </div>
 <div class="nb-w"><p style="font-weight:500">Try asking Nimble your most complex web research questions</p>
 <p style="color:var(--text-secondary,#52514e)">Once you&#x27;re done testing, call the same APIs from your own apps and agents (MCP, SDK, CLI, &amp; more): <a href="https://docs.nimbleway.com/integrations/overview">docs.nimbleway.com/integrations/overview</a></p></div>

@@ -4,7 +4,7 @@
 Writes, next to this script:
   benchmark-chart.svg  the benchmark scatter as static SVG (no JS, light/dark aware)
   benchmark-chart-light.svg / -dark.svg  fixed-theme copies with a solid background, for the GitHub README
-  onboarding.html      chart + five tiles, self-contained (no scripts, no CDN)
+  onboarding.html      chart + use-case tiles + integrations tile, self-contained (no scripts, no CDN)
   onboarding-inline.html  the same chart + tiles as a bare fragment (no doctype, no page background)
                        to pass verbatim to an inline chat widget
   onboarding.png       a screenshot of onboarding.html (needs Google Chrome)
@@ -40,13 +40,16 @@ TILES = [
      "Prepare me for a meeting with Gong (gong.io)."),
     ("Fast search", "Search + Extract APIs",
      "Answers in seconds from company sites, newsrooms, careers pages and the press, with dated citations.",
-     "Who is Datadog's current CRO, and since when?"),
+     "Did Clay raise a round this year?"),
     ("Lists & CRM enrichment", "Web Search Agents + Search APIs",
      "Build ICP account lists with near-misses, and fill CRM fields (firmographics, funding, leaders, hiring) with sources and conflicts kept.",
      "Find US legal AI companies, Series A to C, hiring AEs."),
     ("GTM data at scale", "Extract Templates + Jobs API",
      "Job postings, reviews, local business lists, social and AI-answer visibility from 800+ Extract Templates, as batches or scheduled jobs.",
      "Track sales hiring at my top 200 accounts weekly."),
+    ("People research", "Search + Web Search Agents APIs",
+     "Who holds a role, verified as current, in seconds; deep person briefs, buying committees and job-change checks with agents.",
+     "Who is Gong's CRO today, and since when?"),
 ]
 INTEGRATE_TITLE = "Try asking Nimble your most complex web research questions"
 INTEGRATE_TEXT = "Once you're done testing, call the same APIs from your own apps and agents (MCP, SDK, CLI, & more):"
@@ -145,6 +148,7 @@ def inline_fragment(svg, svg_style):
 .nb-h2{{font-size:15px;font-weight:500;margin:0 0 10px!important}}
 .nb-g{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 @media (max-width:520px){{.nb-g{{grid-template-columns:1fr}}}}
+.nb-tile:last-child:nth-child(odd){{grid-column:1/-1}}
 .nb-tile{{background:var(--surface-2,transparent);border:0.5px solid var(--border,rgba(127,127,127,.35));border-radius:12px;padding:12px 14px}}
 .nb-t{{font-weight:500;font-size:14px}}
 .nb-api{{font-size:12px;color:var(--text-accent,#2a78d6);margin:2px 0 6px!important}}
@@ -194,6 +198,7 @@ def page_html(svg, svg_style):
   h2{{font-size:15px;font-weight:600;margin:0 0 10px}}
   .grid4{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
   @media (max-width:560px){{.grid4{{grid-template-columns:1fr}}}}
+  .tile:last-child:nth-child(odd){{grid-column:1/-1}}
   .tile{{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}}
   .tile p{{margin:0}}
   .t{{font-weight:600;font-size:14px}}
@@ -237,7 +242,7 @@ def main():
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
     if pathlib.Path(chrome).exists():
         subprocess.run([chrome, "--headless=new", "--hide-scrollbars", "--force-device-scale-factor=2",
-                        "--window-size=720,920", f"--screenshot={HERE / 'onboarding.png'}",
+                        "--window-size=720,1090", f"--screenshot={HERE / 'onboarding.png'}",
                         (HERE / "onboarding.html").as_uri()], check=True, capture_output=True)
     else:
         print("Chrome not found; onboarding.png not rebuilt")

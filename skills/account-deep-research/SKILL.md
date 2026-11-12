@@ -1,6 +1,6 @@
 ---
 name: account-deep-research
-description: "Deep, cited research on an account, a watchlist or a market for sales, SDR/BDR, RevOps and marketing teams, run by Nimble Web Search Agents. Use when a GTM question needs many sources or a structured, sourced output, such as a pre-meeting account brief, buying triggers or account signals since a date, current decision makers for named roles, a competitive landscape with pricing, brand sentiment, executive or influencer social posts, an ICP account list, account enrichment, or a local business list. Also use when the request fits none of those: the skill shows how to create and run a custom Web Search Agent. Do NOT use for a single fact or one known URL (use account-fast-search), for enriching a whole CSV or CRM export (use account-lists-and-enrichment), or for bulk job, review, listing or social data tracked over time (use gtm-data-at-scale)."
+description: "Deep, cited research on an account, a watchlist or a market for sales, SDR/BDR, RevOps and marketing teams, run by Nimble Web Search Agents. Use when a GTM question needs many sources or a structured, sourced output, such as a pre-meeting account brief, buying triggers or account signals since a date, current decision makers for named roles, a competitive landscape with pricing, brand sentiment, executive or influencer social posts, an ICP account list, account enrichment, or a local business list. Also use when the request fits none of those: the skill shows how to create and run a custom Web Search Agent. Do NOT use for a single fact or one known URL (use account-fast-search), for research on specific people (use people-research), for enriching a whole CSV or CRM export (use account-lists-and-enrichment), or for bulk job, review, listing or social data tracked over time (use gtm-data-at-scale)."
 ---
 
 # Account deep research with Nimble Web Search Agents
@@ -43,6 +43,7 @@ If two agents fit, run the one closest to the user's words and the shape they ne
 - **One account, a quick answer** → the gallery agent (`account-signals`, `account-enrichment`, `account-discovery`), at `medium` effort where its spec says so.
 - **A watchlist, CRM-ready fields or a verified list** → the GTM-guide agent (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) at `high`.
 - "Who should I call?" is `decision-maker-identification`; "prep me for Thursday" is `account-brief`; "is anything happening at X?" is `account-signals`.
+- Anything about a specific person (a brief on an attendee, a buying committee, whether a contact changed jobs) goes to `people-research`, which has fast Search patterns and people-focused agents.
 
 For more than a handful of accounts to enrich or a list headed for a CRM, hand off to `account-lists-and-enrichment`, which batches these same agents and applies write-back rules. If none fits, go to section 5 and build a custom agent.
 
