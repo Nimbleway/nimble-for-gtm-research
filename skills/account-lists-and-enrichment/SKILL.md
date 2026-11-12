@@ -21,14 +21,16 @@ These skills use six agents. Check in this order: an agent with the same `agent_
 
 | Agent | Job | Gallery template | Bundled spec |
 | - | - | - | - |
-| `gtm-icp-discovery` | ICP list where every hard criterion is verified on a cited page, plus near-misses | no | `account-deep-research/agents/gtm-icp-discovery.json` |
+| `gtm-icp-discovery` | ICP list where every hard criterion is verified on a cited page, plus near-misses | yes | `account-deep-research/agents/gtm-icp-discovery.json` |
 | `account-discovery` | Quick ICP list from a description, each with why it fits and a source | yes | `account-deep-research/agents/account-discovery.json` |
 | `business-discovery` | Local businesses by category and place, with address, phone, website, rating, review count | yes | `account-deep-research/agents/business-discovery.json` |
-| `gtm-account-enrichment` | CRM-shaped profile from a domain, with conflicts between sources kept | no | `account-deep-research/agents/gtm-account-enrichment.json` |
+| `gtm-account-enrichment` | CRM-shaped profile from a domain, with conflicts between sources kept | yes | `account-deep-research/agents/gtm-account-enrichment.json` |
 | `account-enrichment` | Firmographics on one domain: legal name, HQ, industry, ownership, headcount, funding, leaders, tech stack | yes | `account-deep-research/agents/account-enrichment.json` |
 | `decision-maker-identification` | Who holds named roles at an account now | yes | `account-deep-research/agents/decision-maker-identification.json` |
 
-The bundled specs ship in the `account-deep-research` skill of this repo. If only this skill is installed, read them from `https://raw.githubusercontent.com/Nimbleway/nimble-for-gtm-research/main/skills/account-deep-research/agents/<agent_name>.json`. Create each agent once and reuse it; never one agent per account.
+The bundled specs ship in the `account-deep-research` skill of this repo. If only this skill is installed, read them from `https://raw.githubusercontent.com/Nimbleway/nimble-for-gtm-research/main/skills/account-deep-research/agents/<agent_name>.json`. All six are in the **Go-to-market** section of the Nimble gallery, so `nimble_agents_create(template=<name>, agent_name=<name>)` works for each; use the bundled spec only if the gallery does not list one. Create each agent once and reuse it; never one agent per account.
+
+**People at those accounts.** Once the account list is final, `people-research` finds the contacts: `people-discovery` for people who match a role and seniority across the list, `buying-committee-map` for the committee at one target account, and `contact-job-change-monitor` to keep the contact list current.
 
 ## 2. Build a list
 

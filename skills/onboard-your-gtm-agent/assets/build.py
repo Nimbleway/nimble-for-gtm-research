@@ -48,7 +48,7 @@ TILES = [
      "Job postings, reviews, local business lists, social and AI-answer visibility from 800+ Extract Templates, as batches or scheduled jobs.",
      "Track sales hiring at my top 200 accounts weekly."),
     ("People research", "Search + Web Search Agents APIs",
-     "Who holds a role, verified as current, in seconds; deep person briefs, buying committees and job-change checks with agents.",
+     "Who holds a role, verified as current, in seconds; people who match an ICP, person briefs, buying committees and job-change checks with agents.",
      "Who is Gong's CRO today, and since when?"),
 ]
 INTEGRATE_TITLE = "Try asking Nimble your most complex web research questions"

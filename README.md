@@ -94,7 +94,7 @@ benchmark/README.md                             # GTM Use-Case Benchmark v2 resu
 .mcp.json                                       # Nimble MCP server, bundled with the Claude Code plugin
 ```
 
-Every agent spec is a snapshot of a Nimble Web Search Agent gallery template. Three of them (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) started in Nimble's [GTM developer guide](https://www.nimbleway.com/blog/building-gtm-agents-three-use-cases-with-nimbles-apis) and its runnable apps in [Nimbleway/cookbook](https://github.com/Nimbleway/cookbook/tree/main/apps).
+Every agent spec is a snapshot of a template in the **Go-to-market** section of the Nimble Web Search Agent gallery, so all 16 agents (12 account agents plus `people-discovery`, `person-brief`, `buying-committee-map` and `contact-job-change-monitor`) can be created straight from the gallery with a pre-run example answer. Three of them (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) started in Nimble's [GTM developer guide](https://www.nimbleway.com/blog/building-gtm-agents-three-use-cases-with-nimbles-apis) and its runnable apps in [Nimbleway/cookbook](https://github.com/Nimbleway/cookbook/tree/main/apps).
 
 ## Docs
 
