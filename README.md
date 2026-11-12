@@ -4,7 +4,7 @@ Agent skills that give your AI agent (Claude, ChatGPT, Cursor, Codex and others)
 
 | Skill | What it does |
 | - | - |
-| [`onboard-your-agent`](skills/onboard-your-agent/SKILL.md) | Start here. Shows the GTM benchmark chart (deep research task comparison for GTM) and the four use cases as tiles for testing Nimble's APIs in your AI plus a tile for integrating them into your stack, gets you onto a free Nimble trial and connected, then routes your request. |
+| [`onboard-your-gtm-agent`](skills/onboard-your-gtm-agent/SKILL.md) | Start here. Shows the GTM benchmark chart (deep research task comparison for GTM) and the four use cases as tiles for testing Nimble's APIs in your AI plus a tile for integrating them into your stack, gets you onto a free Nimble trial and connected, then routes your request. |
 | [`account-deep-research`](skills/account-deep-research/SKILL.md) | Cited account research with 12 GTM Web Search Agents (account brief, account signals, buying trigger monitor, decision makers, competitive intelligence, brand intelligence, social media monitor, account enrichment, GTM account enrichment, account discovery, ICP discovery, local business discovery), plus a playbook for building your own agent when none fits. |
 | [`account-fast-search`](skills/account-fast-search/SKILL.md) | Answers in seconds with Nimble Search, Extract and Extract Templates: query patterns, first-party source priority, date scoping, entity disambiguation and privacy-safe sourcing for any account, person or competitor question. |
 | [`account-lists-and-enrichment`](skills/account-lists-and-enrichment/SKILL.md) | Build ICP and local account lists with near-misses, and enrich CSVs and CRM records at scale: batching, concurrency, verification gates, precedence rules for conflicting sources and safe CRM write-back. Includes the Search API pipeline for when your code owns the workflow. |
@@ -13,30 +13,31 @@ Agent skills that give your AI agent (Claude, ChatGPT, Cursor, Codex and others)
 ## Quick start
 
 1. **Get a free trial:** https://online.nimbleway.com/signup
-2. **Connect Nimble to your agent.** The MCP server (`https://mcp.nimbleway.com/mcp`) uses OAuth, so no API key is needed. In Claude Code it comes bundled with the plugin in step 3, so there's nothing else to install: run `/mcp` and authorize **nimble**. For enriching whole CSVs, template batches and Jobs, also install the CLI (`npm i -g @nimble-way/nimble-cli`) and set `NIMBLE_API_KEY` from https://online.nimbleway.com/settings/api-keys.
-3. **Install the skills**
-
-   Claude Code (one plugin: the skills plus the Nimble MCP server):
-
-   ```bash
-   claude plugin marketplace add Nimbleway/nimble-for-gtm-research
-   ```
-
-   ```bash
-   claude plugin install nimble-gtm-research@nimble-gtm-research
-   ```
-
-   Cursor, Codex and other agents:
+2. **Install the skills.** One command for Claude Code, Codex, Cursor and other agents:
 
    ```bash
    npx skills add Nimbleway/nimble-for-gtm-research
    ```
 
-   Claude.ai: zip a folder under `skills/` and upload it under **Customize → Skills**. ChatGPT or any other agent: add the `SKILL.md` files to the project or GPT instructions.
+   Other ways to install:
 
-4. **Say "onboard my agent for GTM research"** and answer one question: what GTM research do you want to test? Or try: *"Prepare me for a meeting with Gong (gong.io)."*
+   - **Claude Code, with the MCP server bundled (one step instead of two):** `claude plugin marketplace add Nimbleway/nimble-for-gtm-research`, then `claude plugin install nimble-gtm-research@nimble-gtm-research`.
+   - **ChatGPT (Business, Enterprise and Edu):** zip a folder under `skills/` and upload it under **Skills → Create → Upload from your computer**, one zip per skill. On other plans, add the `SKILL.md` files to a project or custom GPT's instructions.
+   - **Claude.ai:** zip a folder under `skills/` and upload it under **Customize → Skills**.
+   - **Any other agent:** add the `SKILL.md` files to its instructions.
 
-   To call the same APIs from your own code, agents, CRM or warehouse, see https://docs.nimbleway.com/integrations/overview.
+3. **Say "onboard my agent for GTM research"**, or try *"Prepare me for a meeting with Gong (gong.io)."* The onboarding skill checks whether Nimble is connected and, if not, walks you through it for your host. The Nimble MCP server (`https://mcp.nimbleway.com/mcp`) uses OAuth, so no API key is needed:
+
+   | Host | Connect Nimble |
+   | - | - |
+   | Claude Code | `claude mcp add --transport http --scope user nimble https://mcp.nimbleway.com/mcp`, then run `/mcp` and authorize **nimble** (already bundled if you installed the plugin) |
+   | ChatGPT | Settings → Apps & Connectors → add a custom connector with URL `https://mcp.nimbleway.com/mcp` (developer mode on some plans) |
+   | Claude.ai / Claude Desktop | **Customize → Connectors** → add a custom connector at `https://mcp.nimbleway.com/mcp` |
+   | Codex, Cursor and other MCP clients | Add the server URL above to the client's MCP config; the first tool call starts OAuth |
+
+   For enriching whole CSVs, template batches and scheduled Jobs, also install the CLI (`npm i -g @nimble-way/nimble-cli`) and set `NIMBLE_API_KEY` from https://online.nimbleway.com/settings/api-keys.
+
+   To call the same APIs from your own code, agents or warehouse, see https://docs.nimbleway.com/integrations/overview.
 
 ## Example requests
 
@@ -61,8 +62,8 @@ Agent skills that give your AI agent (Claude, ChatGPT, Cursor, Codex and others)
 ## Benchmark
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="skills/onboard-your-agent/assets/benchmark-chart-dark.svg">
-  <img alt="Deep research task comparison for GTM: accuracy + coverage score vs. cost per run. Claude Opus 5.5 0.520 at $0.28, Nimble 0.497 at $0.10, GPT-6.1 Sol 0.448 at $0.21, Exa 0.405 at $0.10, Parallel 0.357 at $0.10, Firecrawl 0.316 at $0.10." src="skills/onboard-your-agent/assets/benchmark-chart-light.svg" width="640">
+  <source media="(prefers-color-scheme: dark)" srcset="skills/onboard-your-gtm-agent/assets/benchmark-chart-dark.svg">
+  <img alt="Deep research task comparison for GTM: accuracy + coverage score vs. cost per run. Claude Opus 5.5 0.520 at $0.28, Nimble 0.497 at $0.10, GPT-6.1 Sol 0.448 at $0.21, Exa 0.405 at $0.10, Parallel 0.357 at $0.10, Firecrawl 0.316 at $0.10." src="skills/onboard-your-gtm-agent/assets/benchmark-chart-light.svg" width="640">
 </picture>
 
 *GTM Use-Case Benchmark v2, 10 tasks, November 2026. Higher and further left is better.*
@@ -73,8 +74,8 @@ In Nimble's public GTM Use-Case Benchmark v2 (meeting prep and signal tracking, 
 
 ```
 skills/
-  onboard-your-agent/SKILL.md
-  onboard-your-agent/assets/                    # prebuilt benchmark chart + tiles (inline fragment, page, PNG, SVGs) and build.py
+  onboard-your-gtm-agent/SKILL.md
+  onboard-your-gtm-agent/assets/                    # prebuilt benchmark chart + tiles (inline fragment, page, PNG, SVGs) and build.py
   account-deep-research/SKILL.md
   account-deep-research/agents/*.json           # 12 agent specs: skill, output schema, example questions
   account-fast-search/SKILL.md

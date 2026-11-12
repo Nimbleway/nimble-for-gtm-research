@@ -12,7 +12,7 @@
       "name": "nimble-gtm-research",
       "source": "./",
       "description": "Account research agents, fast search, ICP list building and CRM enrichment, and GTM signal data at scale for sales, SDR, RevOps and marketing teams, with the Nimble MCP server bundled.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "productivity",
       "tags": [
         "gtm",
@@ -23,7 +23,7 @@
         "web-search"
       ],
       "skills": [
-        "./skills/onboard-your-agent",
+        "./skills/onboard-your-gtm-agent",
         "./skills/account-deep-research",
         "./skills/account-fast-search",
         "./skills/account-lists-and-enrichment",
