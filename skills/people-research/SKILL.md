@@ -1,6 +1,6 @@
 ---
 name: people-research
-description: "Research people for sales and GTM with Nimble: fast, cited answers in seconds with the Search API, and deeper research with people-focused Web Search Agents. Use when the user asks who holds a role at a company (CRO, head of RevOps, CISO...), wants to research a person before a meeting or outreach, wants to know what someone said or posted recently, needs a buying committee mapped at an account, wants to check whether contacts or champions changed jobs, or needs decision makers found across a list of accounts. Covers person disambiguation, verifying that a title is current, query patterns, privacy rules and answer format. Do NOT use for company-level research (use account-deep-research or account-fast-search) or for bulk job-posting, review or social panels (use gtm-data-at-scale)."
+description: "Research people for sales and GTM with Nimble: fast, cited answers in seconds with the Search API, and deeper research with people-focused Web Search Agents. Use when the user asks who holds a role at a company (CRO, head of RevOps, CISO...), wants a list of people who match an ICP (roles, seniority and company criteria), wants to research a person before a meeting or outreach, wants to know what someone said or posted recently, needs a buying committee mapped at an account, wants to check whether contacts or champions changed jobs, or needs decision makers found across a list of accounts. Covers person disambiguation, verifying that a title is current, query patterns, privacy rules and answer format. Do NOT use for company-level research (use account-deep-research or account-fast-search) or for bulk job-posting, review or social panels (use gtm-data-at-scale)."
 ---
 
 # People research with Nimble
@@ -10,7 +10,7 @@ People questions come in two speeds. Start fast, and go deep only when the quest
 | Speed | Nimble API | Use it for | Time |
 | - | - | - | - |
 | **Fast** | **Search** (`nimble_search`, `POST /v2/search`), plus **Extract** for one page | One person or one role: who holds it, since when, where they came from, one recent quote or talk | Seconds |
-| **Deep** | **Web Search Agents** (`nimble_agents_*`) | A full brief on a person, a buying committee at an account, job-change checks on a contact list, decision makers across accounts | About 1.5 to 10 minutes (a person brief took about 2 minutes, a one-contact job-change check about 1.5) |
+| **Deep** | **Web Search Agents** (`nimble_agents_*`) | A list of people who match an ICP, a full brief on a person, a buying committee at an account, job-change checks on a contact list, decision makers across accounts | About 1.5 to 10 minutes (a person brief took about 2 minutes, a one-contact job-change check about 1.5) |
 
 Rule of thumb: if three searches answer it, stay fast. If the user wants a brief, a map, a table or many people, run one agent.
 
@@ -60,15 +60,16 @@ Write down **full name + company + company domain** (and title or city if known)
 
 | Agent (`agent_name`) | Use it when the user asks... | Use case | Source |
 | - | - | - | - |
-| `person-brief` | to research one named person before a meeting or outreach: current role verified with its date, career history, recent public activity, stated priorities, talking points | research | this repo |
+| `people-discovery` | for people who match an ICP for people (roles and seniority, plus company criteria such as industry, size, location or funding), each with why they fit and a page showing the current title | dataset_building | gallery |
+| `person-brief` | to research one named person before a meeting or outreach: current role verified with its date, career history, recent public activity, stated priorities, talking points | research | gallery |
 | `decision-maker-identification` | who holds named roles at one company now, with title, start date, past roles and public profiles | enrichment | gallery |
-| `buying-committee-map` | who at an account would buy, champion, evaluate or block a purchase in a product category, each with why they matter | research | this repo |
-| `contact-job-change-monitor` | whether contacts on a list are still in the same role, changed title, or moved employer, with the date (champion tracking, CRM hygiene) | enrichment | this repo |
+| `buying-committee-map` | who at an account would buy, champion, evaluate or block a purchase in a product category, each with why they matter | research | gallery |
+| `contact-job-change-monitor` | whether contacts on a list are still in the same role, changed title, or moved employer, with the date (champion tracking, CRM hygiene) | enrichment | gallery |
 | `social-media-monitor` | what named people posted in a window, with engagement | dataset_building | gallery |
 
 Each spec (skill, output schema, effort, example questions) is in `agents/<agent_name>.json` next to this file. Read the matching file before the first run; its `suggested_questions` show the input format.
 
-**Get the agent into the account (reuse first):** an agent with the same `agent_name` already in the account (`nimble_agents_list`) → the Nimble gallery (`nimble_agent_templates_list`, then `nimble_agents_create(template=<name>, agent_name=<name>)`, for the two gallery agents) → the bundled spec (pass its `agent_name`, `display_name`, `description`, `use_case`, `effort`, `skill`, `output_schema` and `suggested_questions` unchanged). Create each agent once and reuse it.
+**Get the agent into the account (reuse first):** an agent with the same `agent_name` already in the account (`nimble_agents_list`) → the Nimble gallery (`nimble_agent_templates_list`, then `nimble_agents_create(template=<name>, agent_name=<name>)`) → the bundled spec, if the gallery does not list it yet (pass its `agent_name`, `display_name`, `description`, `use_case`, `effort`, `skill`, `output_schema` and `suggested_questions` unchanged). Create each agent once and reuse it.
 
 **Run it:**
 
@@ -91,6 +92,7 @@ Put the name, company **and domain**, the roles, and the seller's context ("I se
 
 ## 4. Many people, many accounts
 
+- **People who match an ICP:** one `people-discovery` run per scope (a region, a sub-industry or a company-size band), 15 to 50 people per run; split a large market into several scoped runs and pass people already found as `input_data` with "exclude the people in input_data". The company criteria are verified per person, and people at companies that fail one land in `excluded` with the reason.
 - **Decision makers across a list of accounts:** one `decision-maker-identification` run per account (it returns one company's people), run in parallel, about 10 at a time. For a thin first pass across hundreds of accounts, the fast path (one `site:linkedin.com/in "<Company>" "<Title>"` search per account and role) is cheaper; then run agents on the accounts that matter.
 - **Champion tracking:** run `contact-job-change-monitor` over the contact list monthly in batches of about 5. A champion who moved is a new-logo lead at their new company: route it to `account-deep-research` (`account-brief`) for the new employer.
 - **Buying committees:** one `buying-committee-map` run per target account, after the account list is final.

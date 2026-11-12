@@ -1,13 +1,14 @@
 {
-  "template_name": null,
+  "template_name": "gtm-account-enrichment",
   "agent_name": "gtm-account-enrichment",
-  "display_name": "GTM Account Enrichment",
-  "description": "Enrich a CRM account from its domain into a current, cited company profile: products, HQ, headcount, funding, leadership, customers, hiring and recent signals, with conflicts between sources kept.",
+  "display_name": "CRM account enrichment",
+  "description": "Turn a CRM account into a current company profile from its domain: products, customers, HQ, headcount, funding and investors, leadership, hiring and recent signals, with conflicting values from different sources kept side by side.",
   "use_case": "enrichment",
   "effort": "high",
   "suggested_questions": [
     "Enrich the CRM account Eve (eve.legal). Resolve it from the domain: several unrelated companies are called Eve.",
-    "Enrich the CRM account Supio (supio.com)."
+    "Enrich the CRM account Supio (supio.com).",
+    "Enrich the CRM account Attio (attio.com)."
   ],
   "skill": "Enrich a CRM account into a current company profile. The request gives the company name and domain, and may pass\nthe CRM record with the fields to fill set to null.\n\nHow to research it:\n- Resolve the company from its domain, not its name: many unrelated companies share a name.\n- Use the company's own website, newsroom and careers or ATS pages (Greenhouse, Ashby, Lever, Workable) first for\n  identity, products, headquarters, leadership and hiring.\n- Use press releases and reputable business or trade press for funding and recent announcements.\n- Treat data aggregators (Crunchbase, Tracxn, PitchBook, GetLatka, CB Insights) as secondary corroboration only. They\n  are often stale: a headcount of 1-10 for a company that states 1,200 customers is a conflict, not a fact.\n- When sources disagree on a field, pick the best-supported value and record the disagreement in data_conflicts with\n  every value found, its source and date. For headcount, customer count and open roles, the most recent dated value\n  wins; for everything else, the most authoritative source wins.\n- Leave a field null rather than guess.\n\nCitations and evidence:\n- source_url is one full public https URL: the page the value was read on. Never an internal file path or source id. A\n  value from two pages is two values.\n- Dates are the date the event happened or the source states, not the article's publish date and not today's date.\n- A value nobody published is null. Not an estimate from memory, and never padded to reach a requested count.\n- Entity drift is the most common error: a namesake, a parent, a subsidiary or a similarly named company. Resolve every\n  account by its domain before using a page.\n- Only public pages. No logged-in, paywalled or purchased contact data; never construct emails or phone numbers from\n  patterns.",
   "output_schema": {

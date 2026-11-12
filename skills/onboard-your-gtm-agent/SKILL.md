@@ -139,6 +139,7 @@ Once Nimble is connected, say so in one line and route the user's answer from St
 | What changed at an account, buying triggers, a watchlist | `account-deep-research` | `account-signals` (one account) or `gtm-buying-trigger-monitor` (a watchlist) |
 | Who holds a role, one person's title or background ("who is their CRO", "is she still there") | `people-research` | Fast path: one scoped Search, then a date-scoped check that the title is current |
 | Who to talk to: named roles, a person brief, a buying committee, job changes on a contact list | `people-research` | `decision-maker-identification`, `person-brief`, `buying-committee-map`, `contact-job-change-monitor` |
+| A list of people who match an ICP (roles, seniority, company criteria) | `people-research` | `people-discovery` |
 | Competitors, battlecards, pricing comparisons | `account-deep-research` | `competitive-intelligence` |
 | What people say about a brand or product; what an influencer or exec posted | `account-deep-research` | `brand-intelligence`, `social-media-monitor` |
 | Anything else about one account that needs many sources | `account-deep-research` | Build a custom Web Search Agent (section 5 of that skill) |

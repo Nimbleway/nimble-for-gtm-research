@@ -36,7 +36,7 @@ Use one run per account and question. Do not research first and then start a run
 | `gtm-icp-discovery` | for an ICP list where every hard criterion (HQ, category, size, stage, a live sales posting) is verified on a cited page, plus near-misses with the criterion they failed | dataset_building | GTM guide |
 | `business-discovery` | for local businesses by category and place (clinics, salons, contractors, restaurants) with address, phone, website, rating and review count | dataset_building | gallery |
 
-Each agent's full spec (its skill, output schema, effort and example questions) is in `agents/<agent_name>.json` next to this file. Read the matching file before the first run; its `suggested_questions` show the input format the agent expects. The gallery agents' specs are snapshots of the live gallery (2026-11-12); the three GTM-guide agents come from Nimble's cookbook (`Nimbleway/cookbook`, `apps/gtm-*-agent`), where their goals were folded into the skill.
+Each agent's full spec (its skill, output schema, effort and example questions) is in `agents/<agent_name>.json` next to this file. Read the matching file before the first run; its `suggested_questions` show the input format the agent expects. The specs are snapshots of the gallery templates (2026-11-12); the three GTM-guide agents started in Nimble's cookbook (`Nimbleway/cookbook`, `apps/gtm-*-agent`) and were tightened for the gallery: their rules live in the skill and every schema object has non-null required fields.
 
 If two agents fit, run the one closest to the user's words and the shape they need:
 
@@ -52,7 +52,7 @@ For more than a handful of accounts to enrich or a list headed for a CRM, hand o
 Check in this order and stop at the first hit:
 
 1. **Already in the account.** `nimble_agents_list` (MCP) or `GET /v2/agents`. Look for an agent with the same `agent_name` (or `gallery-<name>`, `gtm-<name>`). If found, run it by `agent_id`.
-2. **In the gallery.** `nimble_agent_templates_list` (or `GET /v2/agents/templates`). If a template with the same `template_name` exists, create from it: `nimble_agents_create(template="account-brief", agent_name="account-brief")`. The gallery copy is maintained by Nimble, so prefer it over the bundled file. The three GTM-guide agents (`template_name: null`) are not in the gallery; go to step 3 for them.
+2. **In the gallery.** `nimble_agent_templates_list` (or `GET /v2/agents/templates`). If a template with the same `template_name` exists, create from it: `nimble_agents_create(template="account-brief", agent_name="account-brief")`. The gallery copy is maintained by Nimble, so prefer it over the bundled file. If the gallery does not list a template yet, go to step 3.
 3. **From the bundled spec.** Create the agent from `agents/<agent_name>.json`. Pass its `agent_name`, `display_name`, `description`, `use_case`, `effort`, `skill`, `output_schema` and `suggested_questions` unchanged (omit `output_schema` when it is null: that agent returns free text).
 
 MCP:
