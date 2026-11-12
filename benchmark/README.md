@@ -1,8 +1,8 @@
 # Benchmark: GTM research
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../skills/onboard-your-agent/assets/benchmark-chart-dark.svg">
-  <img alt="Deep research task comparison for GTM: accuracy + coverage score vs. cost per run. Claude Opus 5.5 0.520 at $0.28, Nimble 0.497 at $0.10, GPT-6.1 Sol 0.448 at $0.21, Exa 0.405 at $0.10, Parallel 0.357 at $0.10, Firecrawl 0.316 at $0.10." src="../skills/onboard-your-agent/assets/benchmark-chart-light.svg" width="640">
+  <source media="(prefers-color-scheme: dark)" srcset="../skills/onboard-your-gtm-agent/assets/benchmark-chart-dark.svg">
+  <img alt="Deep research task comparison for GTM: accuracy + coverage score vs. cost per run. Claude Opus 5.5 0.520 at $0.28, Nimble 0.497 at $0.10, GPT-6.1 Sol 0.448 at $0.21, Exa 0.405 at $0.10, Parallel 0.357 at $0.10, Firecrawl 0.316 at $0.10." src="../skills/onboard-your-gtm-agent/assets/benchmark-chart-light.svg" width="640">
 </picture>
 
 *GTM Use-Case Benchmark v2, 10 tasks, November 2026. Higher and further left is better.*

@@ -1,5 +1,5 @@
 ---
-name: onboard-your-agent
+name: onboard-your-gtm-agent
 description: Onboard a personal AI agent (Claude, ChatGPT, Cursor, Codex and others) to Nimble for go-to-market (GTM) research by sales, SDR/BDR, RevOps, marketing and founder-led sales teams. Use when the user first loads these skills, asks how to get started with Nimble for GTM, sales or account research, wants a free trial, needs to connect Nimble, or asks which skill to use. Shows a benchmark chart and five tiles (four use cases to test Nimble's APIs in the user's AI, plus integrating the APIs into their stack), gets the user onto a free Nimble trial and connected, then routes their request to account-deep-research, account-fast-search, account-lists-and-enrichment or gtm-data-at-scale.
 ---
 
@@ -21,7 +21,7 @@ The benchmark chart and the five tiles are prebuilt in `assets/`, next to this f
 | - | - |
 | Render HTML inline in the chat (for example the Claude apps' inline visual or widget tool, an inline HTML block) | Read `assets/onboarding-inline.html` and pass it verbatim: chart and all five tiles in one static fragment (no doctype, no scripts, no libraries, about 6 KB) |
 | Render visuals inline only from SVG | Read `assets/benchmark-chart.svg` and pass it verbatim (3 KB of static SVG), then the markdown tiles below in your reply |
-| Show an image in the chat | `![Deep research task comparison for GTM](https://raw.githubusercontent.com/Nimbleway/nimble-for-gtm-research/main/skills/onboard-your-agent/assets/onboarding.png)` (chart and tiles in one image), then the integrations link below as text so it is clickable |
+| Show an image in the chat | `![Deep research task comparison for GTM](https://raw.githubusercontent.com/Nimbleway/nimble-for-gtm-research/main/skills/onboard-your-gtm-agent/assets/onboarding.png)` (chart and tiles in one image), then the integrations link below as text so it is clickable |
 | None of these (plain terminal) | The benchmark table below under its title, with Nimble's row in bold, then the markdown tiles below |
 
 `assets/onboarding.html` is the same screen as a full standalone page, for hosts that can only preview files; if that is all you can do, also put the markdown tiles in your reply so the user sees them in the chat.
@@ -37,7 +37,7 @@ For the fallbacks, the chart data: Nimble's public GTM Use-Case Benchmark v2 (me
 | Parallel | 0.357 | 0.10 |
 | Firecrawl | 0.316 | 0.10 |
 
-Use exactly these numbers; never round them up, reorder them or add providers. If the user asks, the honest read is: Nimble scored highest of the four research APIs at the same price, and close to Claude Opus 5.5 at about a third of its cost; it found the most verified facts of any provider and scored highest on signal tracking. The same numbers and the tile copy live in `assets/build.py`; when either changes, edit it there and run `python3 skills/onboard-your-agent/assets/build.py` to rebuild the SVGs, the HTML page and fragment, and the PNG.
+Use exactly these numbers; never round them up, reorder them or add providers. If the user asks, the honest read is: Nimble scored highest of the four research APIs at the same price, and close to Claude Opus 5.5 at about a third of its cost; it found the most verified facts of any provider and scored highest on signal tracking. The same numbers and the tile copy live in `assets/build.py`; when either changes, edit it there and run `python3 skills/onboard-your-gtm-agent/assets/build.py` to rebuild the SVGs, the HTML page and fragment, and the PNG.
 
 ### 1b. The five tiles
 
@@ -96,7 +96,7 @@ Default to the MCP server: it uses OAuth, so no API key is created, pasted or st
 
 | Host | How |
 | - | - |
-| Claude Code | Nothing extra to install: this plugin (`nimble-gtm-research`) bundles the Nimble MCP server. Run `/mcp`, pick **nimble** and authorize. If the plugin isn't installed yet, install it first (see **Install these skills** below) |
+| Claude Code | If the `nimble-gtm-research` plugin is installed, the Nimble MCP server is bundled: run `/mcp`, pick **nimble** and authorize. If the skills were installed with `npx skills add`, run `claude mcp add --transport http --scope user nimble https://mcp.nimbleway.com/mcp` in a terminal (or run it for the user if you can run shell commands), then `/mcp` to authorize |
 | Claude.ai / Claude Desktop / Cowork | Install **Nimble** from the plugin directory, or add a custom connector at `https://mcp.nimbleway.com/mcp` under **Customize → Connectors**, then **Connect** |
 | ChatGPT | Settings → Apps & Connectors → add a custom connector with URL `https://mcp.nimbleway.com/mcp` (requires developer mode on some plans), then sign in |
 | Cursor, VS Code, other MCP clients | Add `{"mcpServers": {"nimble": {"type": "http", "url": "https://mcp.nimbleway.com/mcp"}}}`; the first tool call starts OAuth |
@@ -115,14 +115,15 @@ Then the user creates a key at **https://online.nimbleway.com/settings/api-keys*
 
 If a tool returns an authorization URL, show it exactly as given and wait. Do not fall back to a generic web search or fetch tool while waiting; that hides the setup problem and returns different data.
 
-**Install these skills** so the agent can route requests:
+**Install these skills** so the agent can route requests (if the user is reading this, they are installed on this host; share this when they want them on another tool or for a teammate):
 
-| Host | Command |
+| Host | How |
 | - | - |
-| Claude Code | `claude plugin marketplace add Nimbleway/nimble-for-gtm-research && claude plugin install nimble-gtm-research@nimble-gtm-research` (this one plugin is all Claude Code needs: skills and the Nimble MCP server) |
-| Cursor, Codex, other agents | `npx skills add Nimbleway/nimble-for-gtm-research` |
+| Claude Code, Codex, Cursor and other agents | `npx skills add Nimbleway/nimble-for-gtm-research` (one command; then connect the MCP server as above) |
+| Claude Code, with the MCP server bundled | `claude plugin marketplace add Nimbleway/nimble-for-gtm-research && claude plugin install nimble-gtm-research@nimble-gtm-research` |
+| ChatGPT Business, Enterprise and Edu | Zip each folder under `skills/` and upload it under **Skills → Create → Upload from your computer** (one zip per skill; a workspace admin may need to allow uploads) |
+| ChatGPT on other plans, or any other agent | Add the `SKILL.md` files to the project or custom GPT instructions |
 | Claude.ai | Zip each folder under `skills/` and upload it under **Customize → Skills** |
-| ChatGPT or any other agent | Add the `SKILL.md` files to the project or custom GPT instructions |
 
 ## Step 5: Route the request to a skill
 

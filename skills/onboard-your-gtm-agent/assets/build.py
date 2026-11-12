@@ -10,7 +10,7 @@ Writes, next to this script:
   onboarding.png       a screenshot of onboarding.html (needs Google Chrome)
 
 Run after any change to the benchmark numbers or tile copy:
-  python3 skills/onboard-your-agent/assets/build.py
+  python3 skills/onboard-your-gtm-agent/assets/build.py
 The numbers must match benchmark/README.md and the table in ../SKILL.md.
 """
 import html
