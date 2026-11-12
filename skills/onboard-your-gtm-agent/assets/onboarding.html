@@ -15,6 +15,7 @@
   h2{font-size:15px;font-weight:600;margin:0 0 10px}
   .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   @media (max-width:560px){.grid4{grid-template-columns:1fr}}
+  .tile:last-child:nth-child(odd){grid-column:1/-1}
   .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
   .tile p{margin:0}
   .t{font-weight:600;font-size:14px}
@@ -96,7 +97,7 @@
       <p class="t">Fast search</p>
       <p class="api">Search + Extract APIs</p>
       <p class="d">Answers in seconds from company sites, newsrooms, careers pages and the press, with dated citations.</p>
-      <p class="ex">&ldquo;Who is Datadog&#x27;s current CRO, and since when?&rdquo;</p>
+      <p class="ex">&ldquo;Did Clay raise a round this year?&rdquo;</p>
     </div>
     <div class="tile">
       <p class="t">Lists &amp; CRM enrichment</p>
@@ -109,6 +110,12 @@
       <p class="api">Extract Templates + Jobs API</p>
       <p class="d">Job postings, reviews, local business lists, social and AI-answer visibility from 800+ Extract Templates, as batches or scheduled jobs.</p>
       <p class="ex">&ldquo;Track sales hiring at my top 200 accounts weekly.&rdquo;</p>
+    </div>
+    <div class="tile">
+      <p class="t">People research</p>
+      <p class="api">Search + Web Search Agents APIs</p>
+      <p class="d">Who holds a role, verified as current, in seconds; people who match an ICP, person briefs, buying committees and job-change checks with agents.</p>
+      <p class="ex">&ldquo;Who is Gong&#x27;s CRO today, and since when?&rdquo;</p>
     </div>
   </div>
   <div class="wide">

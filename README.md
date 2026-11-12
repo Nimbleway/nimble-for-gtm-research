@@ -4,9 +4,10 @@ Agent skills that give your AI agent (Claude, ChatGPT, Cursor, Codex and others)
 
 | Skill | What it does |
 | - | - |
-| [`onboard-your-gtm-agent`](skills/onboard-your-gtm-agent/SKILL.md) | Start here. Shows the GTM benchmark chart (deep research task comparison for GTM) and the four use cases as tiles for testing Nimble's APIs in your AI plus a tile for integrating them into your stack, gets you onto a free Nimble trial and connected, then routes your request. |
+| [`onboard-your-gtm-agent`](skills/onboard-your-gtm-agent/SKILL.md) | Start here. Shows the GTM benchmark chart (deep research task comparison for GTM) and the five use cases as tiles for testing Nimble's APIs in your AI plus a tile for integrating them into your stack, gets you onto a free Nimble trial and connected, then routes your request. |
 | [`account-deep-research`](skills/account-deep-research/SKILL.md) | Cited account research with 12 GTM Web Search Agents (account brief, account signals, buying trigger monitor, decision makers, competitive intelligence, brand intelligence, social media monitor, account enrichment, GTM account enrichment, account discovery, ICP discovery, local business discovery), plus a playbook for building your own agent when none fits. |
 | [`account-fast-search`](skills/account-fast-search/SKILL.md) | Answers in seconds with Nimble Search, Extract and Extract Templates: query patterns, first-party source priority, date scoping, entity disambiguation and privacy-safe sourcing for any account, person or competitor question. |
+| [`people-research`](skills/people-research/SKILL.md) | People research at two speeds: the Search API answers who holds a role, verified as current, in seconds; six people agents go deeper (people discovery from an ICP, person brief, decision makers, buying committee map, contact job-change monitor, social media monitor). Includes person disambiguation and privacy rules. |
 | [`account-lists-and-enrichment`](skills/account-lists-and-enrichment/SKILL.md) | Build ICP and local account lists with near-misses, and enrich CSVs and CRM records at scale: batching, concurrency, verification gates, precedence rules for conflicting sources and safe CRM write-back. Includes the Search API pipeline for when your code owns the workflow. |
 | [`gtm-data-at-scale`](skills/gtm-data-at-scale/SKILL.md) | Track GTM signals over time with Extract Templates: hiring across target accounts, software and employee reviews, local business listings, search and AI-answer visibility, social activity. Batch runs of up to 1,000 inputs, scheduled Extract Jobs into S3 or Databricks, and template generation for sites without one. |
 
@@ -44,9 +45,12 @@ Agent skills that give your AI agent (Claude, ChatGPT, Cursor, Codex and others)
 - "Prepare me for a meeting with Gong (gong.io). I'm meeting their VP of RevOps."
 - "Check Mercury (mercury.com) for changes since 2026-09-21."
 - "Monitor Cato Networks, Mark43, BlueVoyant and commercetools for buying triggers in the last 30 days. We sell revenue software to B2B SaaS companies."
-- "At Brex, find the current head of data, VP engineering, head of revenue operations and CFO."
+- "At Brex, find the current head of data, VP engineering, head of revenue operations and CFO." (people research)
+- "Brief me on Shane Evans at Gong before my call." (people research)
+- "Check which of these 40 champions changed jobs since June." (people research)
+- "Find 15 heads of RevOps at US B2B SaaS companies with 200 to 2,000 employees that raised since 2025." (people research)
 - "Compare Slack, Microsoft Teams and Google Chat on published pricing, target customers and recent launches."
-- "Who is Datadog's current CRO, and since when?" (fast search)
+- "Who is Datadog's current CRO, and since when?" (people research, fast path)
 - "Find up to 15 US legal AI companies, Series A to C since April 2025, 50 to 500 employees, hiring AEs. Show near-misses." (lists)
 - "Enrich these 200 domains with HQ, headcount, last round and CRO, and flag conflicts before we import to Salesforce." (enrichment)
 - "Track new sales job postings at our top 300 accounts every Monday." (GTM data at scale)
@@ -75,11 +79,13 @@ In Nimble's public GTM Use-Case Benchmark v2 (meeting prep and signal tracking, 
 ```
 skills/
   onboard-your-gtm-agent/SKILL.md
-  onboard-your-gtm-agent/assets/                    # prebuilt benchmark chart + tiles (inline fragment, page, PNG, SVGs) and build.py
+  onboard-your-gtm-agent/assets/                # prebuilt benchmark chart + tiles (inline fragment, page, PNG, SVGs) and build.py
   account-deep-research/SKILL.md
   account-deep-research/agents/*.json           # 12 agent specs: skill, output schema, example questions
   account-fast-search/SKILL.md
   account-fast-search/references/source-map.md
+  people-research/SKILL.md
+  people-research/agents/*.json                 # 6 people agent specs
   account-lists-and-enrichment/SKILL.md
   gtm-data-at-scale/SKILL.md
   gtm-data-at-scale/references/template-catalog.md
@@ -88,7 +94,7 @@ benchmark/README.md                             # GTM Use-Case Benchmark v2 resu
 .mcp.json                                       # Nimble MCP server, bundled with the Claude Code plugin
 ```
 
-Nine of the agent specs are snapshots of Nimble's Web Search Agent gallery; three (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) come from Nimble's [GTM developer guide](https://www.nimbleway.com/blog/building-gtm-agents-three-use-cases-with-nimbles-apis) and its runnable apps in [Nimbleway/cookbook](https://github.com/Nimbleway/cookbook/tree/main/apps).
+Every agent spec is a snapshot of a template in the **Go-to-market** section of the Nimble Web Search Agent gallery, so all 16 agents (12 account agents plus `people-discovery`, `person-brief`, `buying-committee-map` and `contact-job-change-monitor`) can be created straight from the gallery with a pre-run example answer. Three of them (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) started in Nimble's [GTM developer guide](https://www.nimbleway.com/blog/building-gtm-agents-three-use-cases-with-nimbles-apis) and its runnable apps in [Nimbleway/cookbook](https://github.com/Nimbleway/cookbook/tree/main/apps).
 
 ## Docs
 

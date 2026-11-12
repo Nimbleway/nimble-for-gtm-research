@@ -1,6 +1,6 @@
 ---
 name: account-deep-research
-description: "Deep, cited research on an account, a watchlist or a market for sales, SDR/BDR, RevOps and marketing teams, run by Nimble Web Search Agents. Use when a GTM question needs many sources or a structured, sourced output, such as a pre-meeting account brief, buying triggers or account signals since a date, current decision makers for named roles, a competitive landscape with pricing, brand sentiment, executive or influencer social posts, an ICP account list, account enrichment, or a local business list. Also use when the request fits none of those: the skill shows how to create and run a custom Web Search Agent. Do NOT use for a single fact or one known URL (use account-fast-search), for enriching a whole CSV or CRM export (use account-lists-and-enrichment), or for bulk job, review, listing or social data tracked over time (use gtm-data-at-scale)."
+description: "Deep, cited research on an account, a watchlist or a market for sales, SDR/BDR, RevOps and marketing teams, run by Nimble Web Search Agents. Use when a GTM question needs many sources or a structured, sourced output, such as a pre-meeting account brief, buying triggers or account signals since a date, current decision makers for named roles, a competitive landscape with pricing, brand sentiment, executive or influencer social posts, an ICP account list, account enrichment, or a local business list. Also use when the request fits none of those: the skill shows how to create and run a custom Web Search Agent. Do NOT use for a single fact or one known URL (use account-fast-search), for research on specific people (use people-research), for enriching a whole CSV or CRM export (use account-lists-and-enrichment), or for bulk job, review, listing or social data tracked over time (use gtm-data-at-scale)."
 ---
 
 # Account deep research with Nimble Web Search Agents
@@ -25,24 +25,25 @@ Use one run per account and question. Do not research first and then start a run
 | - | - | - | - |
 | `account-brief` | to prepare for a meeting or call: what the company does, its priorities and challenges, recent changes, key people, talking points | research | gallery |
 | `account-signals` | what changed at one account since a date: funding, hires and departures, launches, layoffs, pricing changes, hiring pushes | research | gallery |
-| `gtm-buying-trigger-monitor` | for buying triggers across a watchlist in a window, graded High/Medium/Low for a stated seller, with an outreach angle per account and the rejected events listed | research | GTM guide |
+| `gtm-buying-trigger-monitor` | for buying triggers across a watchlist in a window, graded High/Medium/Low for a stated seller, with an outreach angle per account and the rejected events listed | research | gallery (GTM guide) |
 | `decision-maker-identification` | who currently holds named roles at an account (CRO, head of RevOps, CTO...), with title, start date, past roles and public profiles | enrichment | gallery |
 | `competitive-intelligence` | for a side-by-side of named competitors: published pricing and plans, target customers, differentiators, recent announcements | research | gallery |
 | `brand-intelligence` | how a brand or product is being talked about (Reddit, X, LinkedIn, review sites): a sentiment score, themes, incidents | research | gallery |
 | `social-media-monitor` | what named people or handles posted in a window, with engagement, and what went viral | dataset_building | gallery |
 | `account-enrichment` | for firmographics on one domain: legal name, HQ, industry, ownership, headcount, funding, leaders, tech stack used | enrichment | gallery |
-| `gtm-account-enrichment` | to fill a CRM record from a domain: products, target customer, HQ, headcount, funding and investors, leadership, customer count, hiring, recent signals, with conflicts between sources kept | enrichment | GTM guide |
+| `gtm-account-enrichment` | to fill a CRM record from a domain: products, target customer, HQ, headcount, funding and investors, leadership, customer count, hiring, recent signals, with conflicts between sources kept | enrichment | gallery (GTM guide) |
 | `account-discovery` | for companies matching an ICP description, each with why it fits and a source | dataset_building | gallery |
-| `gtm-icp-discovery` | for an ICP list where every hard criterion (HQ, category, size, stage, a live sales posting) is verified on a cited page, plus near-misses with the criterion they failed | dataset_building | GTM guide |
+| `gtm-icp-discovery` | for an ICP list where every hard criterion (HQ, category, size, stage, a live sales posting) is verified on a cited page, plus near-misses with the criterion they failed | dataset_building | gallery (GTM guide) |
 | `business-discovery` | for local businesses by category and place (clinics, salons, contractors, restaurants) with address, phone, website, rating and review count | dataset_building | gallery |
 
-Each agent's full spec (its skill, output schema, effort and example questions) is in `agents/<agent_name>.json` next to this file. Read the matching file before the first run; its `suggested_questions` show the input format the agent expects. The gallery agents' specs are snapshots of the live gallery (2026-11-12); the three GTM-guide agents come from Nimble's cookbook (`Nimbleway/cookbook`, `apps/gtm-*-agent`), where their goals were folded into the skill.
+Each agent's full spec (its skill, output schema, effort and example questions) is in `agents/<agent_name>.json` next to this file. Read the matching file before the first run; its `suggested_questions` show the input format the agent expects. The specs are snapshots of the gallery templates (2026-11-12). All 12 are in the **Go-to-market** section of the Nimble Web Search Agent gallery, each with a pre-run example answer. The three GTM-guide agents started in Nimble's cookbook (`Nimbleway/cookbook`, `apps/gtm-*-agent`) and were tightened for the gallery: their rules live in the skill and every schema object has non-null required fields.
 
 If two agents fit, run the one closest to the user's words and the shape they need:
 
 - **One account, a quick answer** → the gallery agent (`account-signals`, `account-enrichment`, `account-discovery`), at `medium` effort where its spec says so.
 - **A watchlist, CRM-ready fields or a verified list** → the GTM-guide agent (`gtm-buying-trigger-monitor`, `gtm-account-enrichment`, `gtm-icp-discovery`) at `high`.
 - "Who should I call?" is `decision-maker-identification`; "prep me for Thursday" is `account-brief`; "is anything happening at X?" is `account-signals`.
+- Anything about a specific person (a brief on an attendee, a buying committee, whether a contact changed jobs) goes to `people-research`, which has fast Search patterns and people-focused agents.
 
 For more than a handful of accounts to enrich or a list headed for a CRM, hand off to `account-lists-and-enrichment`, which batches these same agents and applies write-back rules. If none fits, go to section 5 and build a custom agent.
 
@@ -51,7 +52,7 @@ For more than a handful of accounts to enrich or a list headed for a CRM, hand o
 Check in this order and stop at the first hit:
 
 1. **Already in the account.** `nimble_agents_list` (MCP) or `GET /v2/agents`. Look for an agent with the same `agent_name` (or `gallery-<name>`, `gtm-<name>`). If found, run it by `agent_id`.
-2. **In the gallery.** `nimble_agent_templates_list` (or `GET /v2/agents/templates`). If a template with the same `template_name` exists, create from it: `nimble_agents_create(template="account-brief", agent_name="account-brief")`. The gallery copy is maintained by Nimble, so prefer it over the bundled file. The three GTM-guide agents (`template_name: null`) are not in the gallery; go to step 3 for them.
+2. **In the gallery.** `nimble_agent_templates_list` (or `GET /v2/agents/templates`). If a template with the same `template_name` exists, create from it: `nimble_agents_create(template="account-brief", agent_name="account-brief")`. The gallery copy is maintained by Nimble, so prefer it over the bundled file. If the gallery does not list a template (an older deployment, or a custom agent), go to step 3.
 3. **From the bundled spec.** Create the agent from `agents/<agent_name>.json`. Pass its `agent_name`, `display_name`, `description`, `use_case`, `effort`, `skill`, `output_schema` and `suggested_questions` unchanged (omit `output_schema` when it is null: that agent returns free text).
 
 MCP:

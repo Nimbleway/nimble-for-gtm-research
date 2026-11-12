@@ -1,7 +1,7 @@
 {
   "name": "nimble-gtm-research",
-  "version": "1.0.1",
-  "description": "Nimble skills for go-to-market research: cited account research with 12 GTM Web Search Agents, fast first-party search, ICP list building and CRM enrichment, and GTM signal data at scale with Extract Templates.",
+  "version": "1.1.0",
+  "description": "Nimble skills for go-to-market research: cited account research with 12 GTM Web Search Agents, people research (fast Search plus person-brief, buying committee and job-change agents), fast first-party search, ICP list building and CRM enrichment, and GTM signal data at scale with Extract Templates.",
   "author": {
     "name": "Nimble",
     "email": "support@nimbleway.com",
@@ -17,6 +17,7 @@
     "sales-intelligence",
     "prospecting",
     "account-research",
+    "people-research",
     "lead-enrichment",
     "buying-signals",
     "revops",

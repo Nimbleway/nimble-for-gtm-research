@@ -1,25 +1,25 @@
 ---
 name: onboard-your-gtm-agent
-description: Onboard a personal AI agent (Claude, ChatGPT, Cursor, Codex and others) to Nimble for go-to-market (GTM) research by sales, SDR/BDR, RevOps, marketing and founder-led sales teams. Use when the user first loads these skills, asks how to get started with Nimble for GTM, sales or account research, wants a free trial, needs to connect Nimble, or asks which skill to use. Shows a benchmark chart and five tiles (four use cases to test Nimble's APIs in the user's AI, plus integrating the APIs into their stack), gets the user onto a free Nimble trial and connected, then routes their request to account-deep-research, account-fast-search, account-lists-and-enrichment or gtm-data-at-scale.
+description: Onboard a personal AI agent (Claude, ChatGPT, Cursor, Codex and others) to Nimble for go-to-market (GTM) research by sales, SDR/BDR, RevOps, marketing and founder-led sales teams. Use when the user first loads these skills, asks how to get started with Nimble for GTM, sales or account research, wants a free trial, needs to connect Nimble, or asks which skill to use. Shows a benchmark chart and six tiles (five use cases to test Nimble's APIs in the user's AI, plus integrating the APIs into their stack), gets the user onto a free Nimble trial and connected, then routes their request to account-deep-research, account-fast-search, people-research, account-lists-and-enrichment or gtm-data-at-scale.
 ---
 
 # Onboard your agent: Nimble for GTM research
 
 You are setting up Nimble for a go-to-market professional (AE, SDR/BDR, sales leader, RevOps, growth or product marketing, founder doing sales). Nimble gives you the live web as cited, structured data. Follow the steps in order.
 
-## Step 1: Show the benchmark chart, the five tiles and ask one question
+## Step 1: Show the benchmark chart, the six tiles and ask one question
 
-As soon as this skill loads, show the benchmark chart, then the five tiles below it, then ask exactly one question. Do this before any setup talk.
+As soon as this skill loads, show the benchmark chart, then the six tiles below it, then ask exactly one question. Do this before any setup talk.
 
 ### 1a. Show the prebuilt onboarding screen (never redraw it)
 
-The benchmark chart and the five tiles are prebuilt in `assets/`, next to this file (paths below are relative to this skill's base directory). Show them as they are. Never write chart or tile code yourself: generating it is what makes onboarding slow.
+The benchmark chart and the six tiles are prebuilt in `assets/`, next to this file (paths below are relative to this skill's base directory). Show them as they are. Never write chart or tile code yourself: generating it is what makes onboarding slow.
 
-**Show them inline, in the conversation itself.** The user must see the chart and all five tiles in the chat, above your question. Never put them only in a side panel, a file card, a separate artifact or a browser tab, and never tell the user to look in a panel. Pick the first row your host supports:
+**Show them inline, in the conversation itself.** The user must see the chart and all six tiles in the chat, above your question. Never put them only in a side panel, a file card, a separate artifact or a browser tab, and never tell the user to look in a panel. Pick the first row your host supports:
 
 | Your host can… | Show |
 | - | - |
-| Render HTML inline in the chat (for example the Claude apps' inline visual or widget tool, an inline HTML block) | Read `assets/onboarding-inline.html` and pass it verbatim: chart and all five tiles in one static fragment (no doctype, no scripts, no libraries, about 6 KB) |
+| Render HTML inline in the chat (for example the Claude apps' inline visual or widget tool, an inline HTML block) | Read `assets/onboarding-inline.html` and pass it verbatim: chart and all six tiles in one static fragment (no doctype, no scripts, no libraries, about 6 KB) |
 | Render visuals inline only from SVG | Read `assets/benchmark-chart.svg` and pass it verbatim (3 KB of static SVG), then the markdown tiles below in your reply |
 | Show an image in the chat | `![Deep research task comparison for GTM](https://raw.githubusercontent.com/Nimbleway/nimble-for-gtm-research/main/skills/onboard-your-gtm-agent/assets/onboarding.png)` (chart and tiles in one image), then the integrations link below as text so it is clickable |
 | None of these (plain terminal) | The benchmark table below under its title, with Nimble's row in bold, then the markdown tiles below |
@@ -39,19 +39,22 @@ For the fallbacks, the chart data: Nimble's public GTM Use-Case Benchmark v2 (me
 
 Use exactly these numbers; never round them up, reorder them or add providers. If the user asks, the honest read is: Nimble scored highest of the four research APIs at the same price, and close to Claude Opus 5.5 at about a third of its cost; it found the most verified facts of any provider and scored highest on signal tracking. The same numbers and the tile copy live in `assets/build.py`; when either changes, edit it there and run `python3 skills/onboard-your-gtm-agent/assets/build.py` to rebuild the SVGs, the HTML page and fragment, and the PNG.
 
-### 1b. The five tiles
+### 1b. The six tiles
 
-The tiles say what they are: the user is testing Nimble's APIs on real GTM use cases, right here in their own AI. Each tile names the Nimble API behind it. The fifth tile is for taking those APIs into the user's own stack.
+The tiles say what they are: the user is testing Nimble's APIs on real GTM use cases, right here in their own AI. Each tile names the Nimble API behind it. The last tile is for taking those APIs into the user's own stack.
 
 The inline fragment and the PNG already contain the tiles. When you showed only the SVG or the table, put this line above the tiles: **"Test Nimble's APIs on these use cases, right here in your AI."** Then use this markdown:
 
 | 🔎 **Account research** · *Web Search Agents API* | ⚡ **Fast search** · *Search + Extract APIs* |
 | - | - |
 | 12 GTM agents (meeting prep, buying triggers, decision makers, competitive and brand intel, social) plus custom agents. Cited answers in about 2 to 10 minutes. | Answers in seconds from company sites, newsrooms, careers pages and the press, with dated citations. |
-| *"Prepare me for a meeting with Gong (gong.io)."* | *"Who is Datadog's current CRO, and since when?"* |
+| *"Prepare me for a meeting with Gong (gong.io)."* | *"Did Clay raise a round this year?"* |
 | 📋 **Lists & CRM enrichment** · *Web Search Agents + Search APIs* | 📊 **GTM data at scale** · *Extract Templates + Jobs API* |
 | Build ICP account lists with near-misses, and fill CRM fields (firmographics, funding, leaders, hiring) with sources and conflicts kept. | Job postings, reviews, local business lists, social and AI-answer visibility from 800+ Extract Templates, as batches or scheduled jobs. |
 | *"Find US legal AI companies, Series A to C, hiring AEs."* | *"Track sales hiring at my top 200 accounts weekly."* |
+| 👤 **People research** · *Search + Web Search Agents APIs* | |
+| Who holds a role, verified as current, in seconds; people who match an ICP, person briefs, buying committees and job-change checks with agents. | |
+| *"Who is Gong's CRO today, and since when?"* | |
 
 > 🔌 **Try asking Nimble your most complex web research questions**
 >
@@ -59,7 +62,7 @@ The inline fragment and the PNG already contain the tiles. When you showed only 
 
 Then ask:
 
-> **What GTM research do you want to test?** For example, an account you're meeting this week, a watchlist you want buying triggers for, an ICP list you want built, or CRM records you want enriched. Or try: *"Prepare me for a meeting with Gong (gong.io)."*
+> **What GTM research do you want to test?** For example, an account or a person you're meeting this week, a watchlist you want buying triggers for, an ICP list you want built, or CRM records you want enriched. Or try: *"Prepare me for a meeting with Gong (gong.io)."*
 
 Keep the chart, the tiles and the question to one screen. No preamble. Then stop and wait for the user's answer: never run the example prompt yourself or answer it on the user's behalf.
 
@@ -131,10 +134,12 @@ Once Nimble is connected, say so in one line and route the user's answer from St
 
 | What the user said | Skill | First move |
 | - | - | - |
-| A single fact about an account or person ("who is their CRO", "did they raise", "are they hiring AEs", "what's on their pricing page") | `account-fast-search` | One scoped Search, then Extract the primary page |
+| A single fact about an account ("did they raise", "are they hiring AEs", "what's on their pricing page") | `account-fast-search` | One scoped Search, then Extract the primary page |
 | A meeting or call with an account, "brief me on", "prep me for" | `account-deep-research` | `account-brief` |
 | What changed at an account, buying triggers, a watchlist | `account-deep-research` | `account-signals` (one account) or `gtm-buying-trigger-monitor` (a watchlist) |
-| Who to talk to: named roles at an account | `account-deep-research` | `decision-maker-identification` |
+| Who holds a role, one person's title or background ("who is their CRO", "is she still there") | `people-research` | Fast path: one scoped Search, then a date-scoped check that the title is current |
+| Who to talk to: named roles, a person brief, a buying committee, job changes on a contact list | `people-research` | `decision-maker-identification`, `person-brief`, `buying-committee-map`, `contact-job-change-monitor` |
+| A list of people who match an ICP (roles, seniority, company criteria) | `people-research` | `people-discovery` |
 | Competitors, battlecards, pricing comparisons | `account-deep-research` | `competitive-intelligence` |
 | What people say about a brand or product; what an influencer or exec posted | `account-deep-research` | `brand-intelligence`, `social-media-monitor` |
 | Anything else about one account that needs many sources | `account-deep-research` | Build a custom Web Search Agent (section 5 of that skill) |
@@ -147,8 +152,8 @@ If the answer spans more than one (common), start with the fastest piece that un
 
 By motion, the usual starting points:
 
-- **AE preparing for a meeting:** account brief → decision makers for the roles in the deal → competitive intelligence if a rival is in the deal.
-- **SDR/BDR prospecting:** ICP discovery → enrichment of the list → buying triggers on the list weekly → decision makers for the accounts that trigger.
+- **AE preparing for a meeting:** account brief → person brief on each attendee → buying committee map → competitive intelligence if a rival is in the deal.
+- **SDR/BDR prospecting:** ICP discovery → enrichment of the list → buying triggers on the list weekly → decision makers for the accounts that trigger → job-change checks on past champions monthly.
 - **RevOps / data:** enrichment of the CRM in batches with precedence rules → Extract Jobs for hiring and review signals into the warehouse.
 - **Product and competitive marketing:** competitive intelligence → brand intelligence → AI-answer visibility panels (`chatgpt`, `perplexity`, `google_ai`, `gemini` templates).
 - **Local and SMB sales:** business discovery by category and city → Google Maps reviews and ratings → enrichment of the shortlist.
